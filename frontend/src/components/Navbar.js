@@ -4,8 +4,25 @@ import * as FaIcons from 'react-icons/fa';
 import * as AiIcons from 'react-icons/ai';
 import * as BiIcons from 'react-icons/bi';
 import * as HiIcons from 'react-icons/hi';
+import * as ImIcons from 'react-icons/im';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Linka } from 'react-router-dom';
+import {HashLink as Link} from 'react-router-hash-link';
+
+const barData = [
+  {
+    title: 'Home',
+    link: './',
+    icon: <ImIcons.ImHome/>,
+    classname: 'nav-text'  
+  },
+  {
+    title: 'About Us',
+    link: "./#inline",
+    icon: <AiIcons.AiFillAmazonCircle/>,
+    classname: 'nav-text'
+  }
+]
 
 function Navbar() {
   const [leftBar, setLeftBar] = useState(false);
@@ -40,6 +57,15 @@ function Navbar() {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            {barData.map((item, index) => {
+          return (
+            <li key = {index} className={item.classname}>
+              <Link to={item.link}>
+                {item.icon} <pre>  </pre><span>{item.title}</span>
+              </Link>
+            </li>
+          )
+        })}
           </ul>
         </nav>
       </IconContext.Provider>
