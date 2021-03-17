@@ -5,6 +5,7 @@ import * as AiIcons from 'react-icons/ai';
 import * as BiIcons from 'react-icons/bi';
 import * as HiIcons from 'react-icons/hi';
 import * as ImIcons from 'react-icons/im';
+import * as FcIcons from 'react-icons/fc';
 import './Navbar.css';
 import { Linka } from 'react-router-dom';
 import {HashLink as Link} from 'react-router-hash-link';
@@ -19,7 +20,7 @@ const barData = [
   {
     title: 'About Us',
     link: "./#inline",
-    icon: <AiIcons.AiFillAmazonCircle/>,
+    icon: <FcIcons.FcAbout/>,
     classname: 'nav-text'
   }
 ]
