@@ -1,16 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700');
+
 .title {
     color: rgb(73, 55, 59);
     padding-left: 20rem;
     font-size: 29px;
-    font-family: cursive;
+    font-family: poppins;
 }
 
 .navbar {
     background-color: #f1b773;
     height: 80px;
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
+}
+
+.navbar-title {
+    color: rgb(73, 55, 59);
+    font-size: 29px;
+    font-family: poppins;
+    margin-left: 5rem;
 }
 
 .navbar-rights {
@@ -25,29 +34,18 @@
     float: right;
     
 }
-
-
 .menu-bars {
     margin-left: 2rem;
     font-size: 2rem;
     background: none;
 }
-
-.login-bars {
-    margin-right: 2rem;
-    font-size: 2rem;
-    background: none;
-    
-
+.spacing {
+    padding: 25px;
 }
 
-.spacing {
-    margin-right: 4rem;
+.login-bars {
     font-size: 2rem;
     background: none;
-    padding-right: 0rem;
-    padding-left: 35rem;
-    /*right: 8 left: 30*/
 }
 
 .nav-menu {

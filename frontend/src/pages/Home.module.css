@@ -1,7 +1,10 @@
+/* Import for Poppins Font */ 
+@import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,700'); 
+
 .h1 {
     text-align: center;
     padding: 270px 0;
-    font-family: cursive;
+    font-family: poppins; 
 }
 
 .center {
@@ -29,7 +32,6 @@
 
 .inline {
     display: inline-block;
-}
-.title {
-
+    justify-content: center;
+    align-items: center;
 }
