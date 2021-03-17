@@ -8,7 +8,6 @@ import LockIcon from '@material-ui/icons/Lock';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import './Login.css';
 
 const useStyles = makeStyles({
   container: {
