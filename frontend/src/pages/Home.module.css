@@ -1,0 +1,35 @@
+.h1 {
+    text-align: center;
+    padding: 270px 0;
+    font-family: cursive;
+}
+
+.center {
+    overflow-y: scroll;
+    overflow: hidden;
+   /* background-color: azure;*/
+
+}
+
+.left {
+    overflow: hidden;
+    background-color: azure;
+    float:  left;
+    width: 50%;
+    height: 550px;
+}
+
+.right {
+    overflow: hidden;
+    background-color: aliceblue;
+    float:  left;
+    width: 50%;
+    height: 550px;
+}
+
+.inline {
+    display: inline-block;
+}
+.title {
+
+}
