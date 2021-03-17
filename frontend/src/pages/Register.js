@@ -110,7 +110,7 @@ function Register() {
   };
 
   return (
-    <div className="loginClass">
+    <div className>
       <Paper
         elevation={12}
         style={{

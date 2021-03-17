@@ -3,9 +3,9 @@ import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
 import LockIcon from '@material-ui/icons/Lock';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -41,7 +41,11 @@ function Login() {
 
   const handlePasswordOnChange = (event) => {
     let pw = event.target.value;
-    setPassword(pw);
+    if (pw !== '') {
+      setPassword(pw);
+    } else {
+      setPassword('');
+    }
   };
 
   const handleOnClick = async () => {
@@ -70,7 +74,7 @@ function Login() {
   const classes = useStyles();
 
   return (
-    <div className="loginClass">
+    <div>
       <Paper
         elevation={12}
         style={{
@@ -118,6 +122,7 @@ function Login() {
             variant="contained"
             color="primary"
             onClick={handleOnClick}
+            className={classes.buttonStyle}
           >
             Login
           </Button>
