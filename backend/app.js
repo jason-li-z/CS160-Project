@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const cors = require('cors');
+const User = require('./models/User');
 
 const app = express();
 const databaseURI =
@@ -26,9 +28,48 @@ app.get('/', (request, response) => {
   response.json({ sampleText: 'Hello from Default Route' }); // Send "Default Route" response
 });
 
-app.post('/login', (request, response) => {
+app.post('/login', async (request, response) => {
   const { username, password } = request.body;
-  console.log(`Username:${username}, password: ${password}`);
+  await User.findOne({ username: username }, (err, user) => {
+    if (err) throw err;
+    if (user) {
+      bcrypt.compare(password, user.password).then((result) => {
+        if (result) {
+          let token = user.generateJWT();
+          console.log(`JWT Token for ${user.username} is ${token}`);
+        } else {
+          console.log('Please check login credentials again');
+        }
+      });
+    }
+  });
+  response.json();
+});
+
+app.post('/register', async (request, response) => {
+  const { firstName, lastName, username, password } = request.body;
+  // Check if user exist in MongoDB
+  // If not, hash password, create entry
+  const testUser = User({
+    firstName: firstName,
+    lastName: lastName,
+    username: username,
+    password: password,
+  });
+  await User.findOne({ username: username }, (err, user) => {
+    if (err) throw err;
+    // User does not exist
+    if (user === null) {
+      testUser.save(function (err) {
+        if (err) throw err;
+        console.log('Creating user...');
+        console.log(testUser);
+      });
+    } else {
+      console.log(user);
+    }
+  });
+
   response.json();
 });
 
