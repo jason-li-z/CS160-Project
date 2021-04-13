@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-
+/*Displays the user profile information */
 function Profile()
 {
 
@@ -72,7 +72,7 @@ function Profile()
         <Typography variant="h6" style={{ paddingRight: 15, paddingTop: 40, paddingBottom: 40 }}>
           Name: {profileInfo.firstName} {profileInfo.lastName}
         </Typography>
-                {/*Display Username*/}
+        {/*Display Username*/}
         <Link to="/UserMain" style={{ color: 'inherit', textDecoration: 'inherit' }}>
             {' '}
               <Button variant="contained" color="primary" style={{ paddingRight: 15, marginLeft: 120}} >
