@@ -86,14 +86,14 @@ app.get('/profile', async (request, response) => {
   const data = await User.findOne({username: getUserInfo});
   response.json(data);
 });
-    
+
 /*
 app.get('/profile', async(request, response) => {
   var auth = request.headers.authorization.split(' ')[1], decoded;
   decoded = jwt.verify(auth, secret.secretToken);
   var userId = decoded.id;
   User.findOne({_id: userId})
-  
+   
   response.json();
 
 })  
