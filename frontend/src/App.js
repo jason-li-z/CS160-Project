@@ -26,6 +26,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/profile" component={Profile} />
+          {/*<Route path="/profile" component={Profile} />*/}
         </Switch>
       </Router>
     </ThemeProvider>
