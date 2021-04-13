@@ -3,6 +3,9 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const User = require('./models/User');
+const { request, response } = require('express');
+const { JsonWebTokenError, decode } = require('jsonwebtoken');
+const { db } = require('./models/User');
 
 const app = express();
 const databaseURI =
@@ -30,12 +33,13 @@ app.get('/', (request, response) => {
 
 app.post('/login', async (request, response) => {
   const { username, password } = request.body;
-  await User.findOne({ username: username }, (err, user) => {
+  await User.findOne({ username: 'username '}, (err, user) => {
     if (err) throw err;
     if (user) {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
           let token = user.generateJWT();
+          
           console.log(`JWT Token for ${user.username} is ${token}`);
         } else {
           console.log('Please check login credentials again');
@@ -45,6 +49,7 @@ app.post('/login', async (request, response) => {
   });
   response.json();
 });
+
 
 app.post('/register', async (request, response) => {
   const { firstName, lastName, username, password } = request.body;
@@ -73,6 +78,26 @@ app.post('/register', async (request, response) => {
   response.json();
 });
 
+//Get the profile information
+app.get('/profile', async (request, response) => {
+//  request.get
+//Suppose to retrive using data from JWT Token
+  const getUserInfo = 'adri';
+  const data = await User.findOne({username: getUserInfo});
+  response.json(data);
+});
+    
+/*
+app.get('/profile', async(request, response) => {
+  var auth = request.headers.authorization.split(' ')[1], decoded;
+  decoded = jwt.verify(auth, secret.secretToken);
+  var userId = decoded.id;
+  User.findOne({_id: userId})
+  
+  response.json();
+
+})  
+*/
 const port = process.env.PORT || 5000; // We are reserving port 3000 for the frontend.
 
 app.listen(port);
