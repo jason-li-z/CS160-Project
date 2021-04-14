@@ -33,23 +33,22 @@ app.get('/', (request, response) => {
 
 app.post('/login', async (request, response) => {
   const { username, password } = request.body;
-  await User.findOne({ username: 'username '}, (err, user) => {
+  await User.findOne({ username: username }, (err, user) => {
     if (err) throw err;
     if (user) {
       bcrypt.compare(password, user.password).then((result) => {
         if (result) {
-          let token = user.generateJWT();
-          
-          console.log(`JWT Token for ${user.username} is ${token}`);
+          const jwt = user.generateJWT();
+          response.json({ status: 200, token: jwt });
         } else {
-          console.log('Please check login credentials again');
+          response.json({ status: 401, message: 'Invalid authentication' });
         }
       });
+    } else {
+      response.json({ status: 401, message: 'User was not found' });
     }
   });
-  response.json();
 });
-
 
 app.post('/register', async (request, response) => {
   const { firstName, lastName, username, password } = request.body;
@@ -80,10 +79,10 @@ app.post('/register', async (request, response) => {
 
 //Get the profile information
 app.get('/profile', async (request, response) => {
-//  request.get
-//Suppose to retrive using data from JWT Token
+  //  request.get
+  //Suppose to retrive using data from JWT Token
   const getUserInfo = 'adri';
-  const data = await User.findOne({username: getUserInfo});
+  const data = await User.findOne({ username: getUserInfo });
   response.json(data);
 });
 
