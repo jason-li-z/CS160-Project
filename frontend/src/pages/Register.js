@@ -23,14 +23,17 @@ function Register() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const [firstNameError, setFirstNameError] = useState(false);
   const [lastNameError, setLastNameError] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
+  const [passwordError, setPasswordError] = useState(false);
 
   const [firstNameErrorText, setFirstNameErrorText] = useState('');
   const [lastNameErrorText, setLastNameErrorText] = useState('');
   const [usernameErrorText, setUsernameErrorText] = useState('');
+  const [passwordErrorText, setPasswordErrorText] = useState('');
 
   const handleFirstNameOnChange = (event) => {
     let user = event.target.value;
@@ -80,8 +83,18 @@ function Register() {
     }
   };
 
+  const handlePasswordOnChange = (event) => {
+    let password = event.target.value;
+    setPassword(password);
+  };
+
   const handleOnClick = () => {
-    if (username === '' || firstName === '' || lastName === '') {
+    if (
+      username === '' ||
+      firstName === '' ||
+      lastName === '' ||
+      password === ''
+    ) {
       // Validation
       if (username === '') {
         setUsernameError(true);
@@ -95,17 +108,37 @@ function Register() {
         setLastNameError(true);
         setLastNameErrorText('Please double check last name');
       }
+
+      if (password === '') {
+        setPasswordError(true);
+        setPasswordErrorText('Please double check password');
+      }
     } else {
       // Send POST request to backend
       setFirstNameErrorText('');
       setLastNameErrorText('');
       setUsernameErrorText('');
+      setPasswordErrorText('');
       setLastNameError(false);
       setFirstNameError(false);
       setUsernameError(false);
-      console.log(
-        `First Name:${firstName}, Last Name: ${lastName}, Username: ${username}`
-      );
+      setPasswordError(false);
+      fetch('http://localhost:5000/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: firstName,
+          lastName: lastName,
+          username: username,
+          password: password,
+        }),
+      }).then((response) => {
+        if (response.status === 200) {
+          console.log('Success!');
+        }
+      });
     }
   };
 
@@ -144,12 +177,21 @@ function Register() {
             onChange={handleLastNameOnChange}
           ></TextField>
         </Container>
-        <Container className={classes.container}>
+        <Container className={classes.container} style={{ paddingBottom: 15 }}>
           <TextField
             error={usernameError}
             helperText={usernameErrorText}
             label="Username"
             onChange={handleUsernameOnChange}
+          ></TextField>
+        </Container>
+        <Container className={classes.container}>
+          <TextField
+            type="password"
+            error={passwordError}
+            helperText={passwordErrorText}
+            label="Password"
+            onChange={handlePasswordOnChange}
           ></TextField>
         </Container>
         <Container
