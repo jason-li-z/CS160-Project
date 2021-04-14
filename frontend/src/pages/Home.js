@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import styles from './Home.module.css';
 import * as BsIcons from 'react-icons/bs';
@@ -6,6 +6,16 @@ import Container from '@material-ui/core/Container';
 import { Link } from 'react-router-dom';
 
 function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [jwt, setJwt] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      setJwt(localStorage.getItem('token'));
+    }
+  });
+  console.log(jwt);
+
   return (
     <div>
       <Navbar />

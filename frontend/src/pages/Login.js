@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   container: {
@@ -18,6 +19,7 @@ const useStyles = makeStyles({
 });
 
 function Login() {
+  const history = useHistory();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
@@ -57,17 +59,20 @@ function Login() {
       // Send POST request to backend
       setError(false);
       setErrorText('');
-      fetch('http://localhost:5000/login', {
+      let res = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ username: username, password: password }),
-      }).then((response) => {
-        if (response.status === 200) {
-          console.log('Success!');
-        }
       });
+      let data = await res.json();
+      if (data.status === 200) {
+        localStorage.setItem('token', data.token);
+        history.push('/');
+      } else {
+        console.log(data.message);
+      }
     }
   };
 
