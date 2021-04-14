@@ -69,8 +69,9 @@ function Login() {
       let data = await res.json();
       if (data.status === 200) {
         localStorage.setItem('token', data.token);
-        history.push('/');
+        history.push('/userMain');
       } else {
+        localStorage.setItem('token', null);
         console.log(data.message);
       }
     }
