@@ -8,19 +8,27 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [jwt, setJwt] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem('token') !== 'null') {
-      setJwt(localStorage.getItem('token'));
-      setIsLoggedIn(true);
-    } else {
-      setJwt(null);
-      setIsLoggedIn(false);
-    }
+    // Check if token has expired
+    const validate = async () => {
+      let result = await fetch('http://localhost:5000/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: localStorage.getItem('token') }),
+      });
+      let data = await result.json();
+      if (data.status !== 401) {
+        setIsLoggedIn(true);
+      } else {
+        setIsLoggedIn(false);
+      }
+    };
+    validate();
   });
 
-  // console.log(jwt);
   if (isLoggedIn) {
     return (
       <div>
@@ -60,14 +68,12 @@ function Home() {
                   <br></br>
                   <BsIcons.BsArrowRight />
                   <b>
-                    Users will get to view trends in their Productivity/Mood{' '}
-                    <br></br>
+                    Users will get to view trends in their Productivity/Mood <br></br>
                   </b>
                   <br></br>
                   <BsIcons.BsArrowRight />
                   <b>
-                    Users will be notified if their they fall below certain
-                    thereshold <br></br>
+                    Users will be notified if their they fall below certain thereshold <br></br>
                   </b>
                   <br></br>
                   <BsIcons.BsArrowRight />
@@ -130,14 +136,12 @@ function Home() {
                 <br></br>
                 <BsIcons.BsArrowRight />
                 <b>
-                  Users will get to view trends in their Productivity/Mood{' '}
-                  <br></br>
+                  Users will get to view trends in their Productivity/Mood <br></br>
                 </b>
                 <br></br>
                 <BsIcons.BsArrowRight />
                 <b>
-                  Users will be notified if their they fall below certain
-                  thereshold <br></br>
+                  Users will be notified if their they fall below certain thereshold <br></br>
                 </b>
                 <br></br>
                 <BsIcons.BsArrowRight />
