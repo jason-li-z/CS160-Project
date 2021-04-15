@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const User = require('./models/User');
+const jwt = require('jsonwebtoken');
 const { request, response } = require('express');
 const { JsonWebTokenError, decode } = require('jsonwebtoken');
 const { db } = require('./models/User');
@@ -84,6 +85,14 @@ app.get('/profile', async (request, response) => {
   const getUserInfo = 'adri';
   const data = await User.findOne({ username: getUserInfo });
   response.json(data);
+});
+
+app.post('/auth', async (req, res) => {
+  let token = req.body.token;
+  jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
+    if (err) res.json({ status: 401, message: 'token expired' });
+    res.json(decoded);
+  });
 });
 
 /*
