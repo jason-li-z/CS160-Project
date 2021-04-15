@@ -38,7 +38,7 @@ UserSchema.pre('save', async function (next) {
 UserSchema.methods.generateJWT = function () {
   let today = new Date();
   let expiration = new Date(today);
-  expiration.setDate(today.getDate() + 1); // Expires in 24 hour (1 day)
+  expiration.setHours(today.getHours() + 1); // Expires in 24 hour (1 day)
   console.log(`JWT Expiration Date: ${expiration}`);
   return jwt.sign(
     {
