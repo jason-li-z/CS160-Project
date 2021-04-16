@@ -3,8 +3,25 @@
 
 .h1 {
     text-align: center;
-    padding: 270px 0;
+    padding: 220px 0;
     font-family: poppins; 
+    animation: logoanimation 7s;
+}
+
+
+@keyframes logoanimation {
+    0% {opacity: 0%;}
+    10% {opacity: 10%;}
+    20% {   opacity: 20%;}
+    30% {   opacity: 30%;  }
+    40% {   opacity: 40%; }
+    50% {   opacity: 50%; }
+    60% {   opacity: 60%; }
+    70% {   opacity: 70%; }
+    80% {   opacity: 80%; }
+    90% {   opacity: 90%; }
+    100% {   opacity: 100%; }
+    
 }
 
 .center {
