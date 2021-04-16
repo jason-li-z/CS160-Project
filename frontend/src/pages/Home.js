@@ -4,6 +4,9 @@ import NavbarUser from '../components/NavbarUser';
 import styles from './Home.module.css';
 import * as BsIcons from 'react-icons/bs';
 import Container from '@material-ui/core/Container';
+import logo from './logo.png';
+import Footer from '../components/Footer'
+import About from '../components/About';
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -38,7 +41,7 @@ function Home() {
     return (
       <div>
         <NavbarUser handleLogout={handleLogout} />
-        <h1 className={styles.h1}>LOGO LOCATION</h1>
+        <h1 className={styles.h1}><img src = {logo}/></h1>
         <div className={styles.center}>
           <div className={styles.left}>
             <div
@@ -106,7 +109,7 @@ function Home() {
   return (
     <div>
       <Navbar />
-      <h1 className={styles.h1}>LOGO LOCATION</h1>
+      <h1 className={styles.h1}><img src = {logo}/></h1>
       <div className={styles.center}>
         <div className={styles.left}>
           <div
@@ -166,6 +169,12 @@ function Home() {
         <div className={styles.right}>
           <p>Image</p>
         </div>
+      </div>
+      <div>
+        <About/>
+      </div>
+      <div>
+        <Footer/>
       </div>
     </div>
   );
