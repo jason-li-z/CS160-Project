@@ -132,7 +132,7 @@ function Register() {
         }),
       }).then((response) => {
         if (response.status === 200) {
-          history.push('/');
+          history.push({ pathname: '/', state: { message: 'Registered successfully' } });
         }
       });
     }

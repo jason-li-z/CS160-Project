@@ -13,7 +13,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 
-function Home() {
+function Home(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [toastMsg, setToastMsg] = useState('Currently not logged in');
@@ -133,7 +133,7 @@ function Home() {
   return (
     <div>
       <Snackbar open={open} autoHideDuration={2500} onClose={handleClose}>
-        <Alert severity="success">{toastMsg}</Alert>
+        <Alert severity="success">{props.location.state !== undefined ? 'Registered successfully!' : toastMsg}</Alert>
       </Snackbar>
       <Navbar />
       <h1 className={styles.h1}>
