@@ -4,13 +4,19 @@ import NavbarUser from '../components/NavbarUser';
 import styles from './Home.module.css';
 import * as BsIcons from 'react-icons/bs';
 import Container from '@material-ui/core/Container';
+import Button from '@material-ui/core/Button';
+
 import logo from './logo.png';
-import Footer from '../components/Footer'
+import Footer from '../components/Footer';
 import About from '../components/About';
+import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
+import Alert from '@material-ui/lab/Alert';
 
 function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [toastMsg, setToastMsg] = useState('Currently not logged in');
 
   useEffect(() => {
     // Check if token has expired
@@ -25,6 +31,8 @@ function Home() {
       let data = await result.json();
       if (data.status !== 401) {
         setIsLoggedIn(true);
+        setUsername(data.username);
+        setToastMsg(`Currently logged in as ${username}`);
       } else {
         setIsLoggedIn(false);
       }
@@ -32,16 +40,32 @@ function Home() {
     validate();
   });
 
+  const [open, setOpen] = useState(true);
+
   const handleLogout = () => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
+    setOpen(true);
+    setToastMsg('Successfully logged out');
+  };
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
   };
 
   if (isLoggedIn) {
     return (
       <div>
+        <Snackbar open={open} autoHideDuration={2500} onClose={handleClose}>
+          <Alert severity="success">{toastMsg}</Alert>
+        </Snackbar>
         <NavbarUser handleLogout={handleLogout} />
-        <h1 className={styles.h1}><img src = {logo}/></h1>
+        <h1 className={styles.h1}>
+          <img src={logo} />
+        </h1>
         <div className={styles.center}>
           <div className={styles.left}>
             <div
@@ -108,8 +132,13 @@ function Home() {
 
   return (
     <div>
+      <Snackbar open={open} autoHideDuration={2500} onClose={handleClose}>
+        <Alert severity="success">{toastMsg}</Alert>
+      </Snackbar>
       <Navbar />
-      <h1 className={styles.h1}><img src = {logo}/></h1>
+      <h1 className={styles.h1}>
+        <img src={logo} />
+      </h1>
       <div className={styles.center}>
         <div className={styles.left}>
           <div
@@ -171,10 +200,10 @@ function Home() {
         </div>
       </div>
       <div>
-        <About/>
+        <About />
       </div>
       <div>
-        <Footer/>
+        <Footer />
       </div>
     </div>
   );
