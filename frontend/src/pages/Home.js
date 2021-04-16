@@ -29,10 +29,15 @@ function Home() {
     validate();
   });
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
+
   if (isLoggedIn) {
     return (
       <div>
-        <NavbarUser />
+        <NavbarUser handleLogout={handleLogout} />
         <h1 className={styles.h1}>LOGO LOCATION</h1>
         <div className={styles.center}>
           <div className={styles.left}>

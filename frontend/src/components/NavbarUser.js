@@ -9,32 +9,32 @@ import * as FcIcons from 'react-icons/fc';
 import * as CgIcons from 'react-icons/cg';
 import * as GoIcons from 'react-icons/go';
 import './Navbar.css';
-import {HashLink as Link} from 'react-router-hash-link';
+import { HashLink as Link } from 'react-router-hash-link';
 
 const barData = [
   {
     title: 'Home',
     link: './',
-    icon: <ImIcons.ImHome/>,
-    classname: 'nav-text'  
+    icon: <ImIcons.ImHome />,
+    classname: 'nav-text',
   },
   //LINK IS NOT SET UP YET
   {
     title: 'Graph',
-    link: "./#inline",
-    icon: <GoIcons.GoGraph/>,
-    classname: 'nav-text'
+    link: './#inline',
+    icon: <GoIcons.GoGraph />,
+    classname: 'nav-text',
   },
   //LINK IS NOT SET UP YET
   {
     title: 'User Data',
-    link: "./#inline",
-    icon: <BiIcons.BiCalendarWeek/>,
-    classname: 'nav-text'
-  }
-]
+    link: './#inline',
+    icon: <BiIcons.BiCalendarWeek />,
+    classname: 'nav-text',
+  },
+];
 
-function NavbarUser() {
+function NavbarUser({ handleLogout }) {
   const [leftBar, setLeftBar] = useState(false);
   const displayBar = () => setLeftBar(!leftBar);
 
@@ -53,7 +53,7 @@ function NavbarUser() {
               <CgIcons.CgProfile />
             </Link>
             <Link to="/" className="spacing">
-              <BiIcons.BiLogOut />
+              <BiIcons.BiLogOut onClick={handleLogout} />
             </Link>
             {/*Sign Up page for onclick*/}
             {/*<FaIcons.FaAddressBook onClick={displayBar}/> */}
@@ -68,14 +68,15 @@ function NavbarUser() {
               </Link>
             </li>
             {barData.map((item, index) => {
-          return (
-            <li key = {index} className={item.classname}>
-              <Link to={item.link}>
-                {item.icon} <pre>  </pre><span>{item.title}</span>
-              </Link>
-            </li>
-          )
-        })}
+              return (
+                <li key={index} className={item.classname}>
+                  <Link to={item.link}>
+                    {item.icon} <pre> </pre>
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </IconContext.Provider>
