@@ -8,7 +8,7 @@ import FaceIcon from '@material-ui/icons/Face';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-
+import { useHistory } from 'react-router-dom';
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -19,6 +19,7 @@ const useStyles = makeStyles({
 
 function Register() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -89,12 +90,7 @@ function Register() {
   };
 
   const handleOnClick = () => {
-    if (
-      username === '' ||
-      firstName === '' ||
-      lastName === '' ||
-      password === ''
-    ) {
+    if (username === '' || firstName === '' || lastName === '' || password === '') {
       // Validation
       if (username === '') {
         setUsernameError(true);
@@ -136,7 +132,7 @@ function Register() {
         }),
       }).then((response) => {
         if (response.status === 200) {
-          console.log('Success!');
+          history.push('/');
         }
       });
     }
@@ -194,22 +190,14 @@ function Register() {
             onChange={handlePasswordOnChange}
           ></TextField>
         </Container>
-        <Container
-          className={classes.container}
-          style={{ marginTop: 25, padding: 30 }}
-        >
+        <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
           <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
             {' '}
             <Button color="primary" style={{ marginRight: 75 }}>
               Back Home
             </Button>
           </Link>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={handleOnClick}
-          >
+          <Button type="submit" variant="contained" color="primary" onClick={handleOnClick}>
             Register
           </Button>
         </Container>
