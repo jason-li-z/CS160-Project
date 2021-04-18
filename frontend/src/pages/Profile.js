@@ -33,9 +33,16 @@ function Profile()
 
     useEffect(() => {
     const getData = async () => {
-      const result = await fetch('http://localhost:5000/profile');
-      const body = await result.json();
-      setProfileInfo(body);
+      let result = await fetch('http://localhost:5000/profile', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ token: localStorage.getItem('token') }),
+      });
+      let data = await result.json();
+      //Set the variable data
+      setProfileInfo(data);
     }
     getData();
     });
@@ -53,18 +60,18 @@ function Profile()
           borderRadius: '20px'
         }}
       >
+        {/*Displays the profile name and a face icon*/}
         <Container className={classes.container} style={{ padding: 10 }}>
           <Typography variant="h5" style={{ paddingRight: 15 }}>
           {profileInfo.firstName}'s Profile Page
           </Typography>
         </Container>
-
         <Container className={classes.container} style={{ padding: 10 }}>
         <Avatar className={classes.large} style={{ backgroundColor: '#3B3235' }}>
             <FaceIcon className={classes.large}></FaceIcon>
           </Avatar>
         </Container>
-        {/*<h1>{profileInfo.username}</h1>*/}
+
         {/*Displays the username and name  QUERY USING MONGOOSE*/}
         <Typography variant="h6" style={{ paddingRight: 15 }}>
           Username:  {profileInfo.username}
@@ -72,6 +79,7 @@ function Profile()
         <Typography variant="h6" style={{ paddingRight: 15, paddingTop: 40, paddingBottom: 40 }}>
           Name: {profileInfo.firstName} {profileInfo.lastName}
         </Typography>
+        
         {/*Display Username*/}
         <Link to="/UserMain" style={{ color: 'inherit', textDecoration: 'inherit' }}>
             {' '}
