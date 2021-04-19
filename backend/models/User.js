@@ -44,6 +44,8 @@ UserSchema.methods.generateJWT = function () {
     {
       id: this._id,
       username: this.username,
+      firstName: this.firstName,
+      lastName: this.lastName,
       exp: parseInt(expiration.getTime() / 1000),
     },
     secret

@@ -79,12 +79,12 @@ app.post('/register', async (request, response) => {
 });
 
 //Get the profile information
-app.get('/profile', async (request, response) => {
-  //  request.get
-  //Suppose to retrive using data from JWT Token
-  const getUserInfo = 'adri';
-  const data = await User.findOne({ username: getUserInfo });
-  response.json(data);
+app.post('/profile', async (request, response) => {
+  let token = request.body.token;
+  jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
+    if (err) response.json({ status: 401, message: 'token expired' });
+    response.json(decoded);
+  });
 });
 
 app.post('/auth', async (req, res) => {
