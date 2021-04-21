@@ -54,7 +54,7 @@ function Login() {
     if (username === '' || password === '') {
       // Validation
       setError(true);
-      setErrorText('Please check your login information');
+      setErrorText('Login information cannot be blank');
     } else {
       // Send POST request to backend
       setError(false);
@@ -72,7 +72,8 @@ function Login() {
         history.push('/userMain');
       } else {
         localStorage.setItem('token', null);
-        console.log(data.message);
+        setError(true);
+        setErrorText('Invalid login credentials, please try again');
       }
     }
   };
@@ -99,37 +100,19 @@ function Login() {
           </Avatar>
         </Container>
         <Container className={classes.container} style={{ padding: 20 }}>
-          <TextField
-            error={error}
-            helperText={errorText}
-            label="Username"
-            onChange={handleUserOnChange}
-          ></TextField>
+          <TextField error={error} helperText={errorText} label="Username" onChange={handleUserOnChange}></TextField>
         </Container>
         <Container className={classes.container}>
-          <TextField
-            label="Password"
-            type="password"
-            onChange={handlePasswordOnChange}
-          ></TextField>
+          <TextField label="Password" type="password" onChange={handlePasswordOnChange}></TextField>
         </Container>
-        <Container
-          className={classes.container}
-          style={{ marginTop: 25, padding: 30 }}
-        >
+        <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
           <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
             {' '}
             <Button color="primary" style={{ marginRight: 75 }}>
               Back Home
             </Button>
           </Link>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            onClick={handleOnClick}
-            className={classes.buttonStyle}
-          >
+          <Button type="submit" variant="contained" color="primary" onClick={handleOnClick} className={classes.buttonStyle}>
             Login
           </Button>
         </Container>
