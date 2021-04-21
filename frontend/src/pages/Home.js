@@ -17,6 +17,7 @@ function Home(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [toastMsg, setToastMsg] = useState('Currently not logged in');
+  const [open, setOpen] = useState(true);
 
   useEffect(() => {
     // Check if token has expired
@@ -39,8 +40,6 @@ function Home(props) {
     };
     validate();
   });
-
-  const [open, setOpen] = useState(true);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
