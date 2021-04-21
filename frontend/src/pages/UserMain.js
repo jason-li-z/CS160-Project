@@ -9,7 +9,12 @@ function UserMain() {
     setIsLoggedIn(false);
   };
 
-  return <NavbarUser handleLogout={handleLogout} />;
+  return (
+    <div>
+      <NavbarUser handleLogout={handleLogout}></NavbarUser>
+      Questions Components
+    </div>
+  );
 }
 
 export default UserMain;
