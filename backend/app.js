@@ -82,8 +82,11 @@ app.post('/register', async (request, response) => {
 app.post('/profile', async (request, response) => {
   let token = request.body.token;
   jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
-    if (err) response.json({ status: 401, message: 'token expired' });
-    response.json(decoded);
+    if (err) {
+      response.json({ status: 401, message: 'token expired' });
+      return;
+    }
+    response.json({ status: 200, data: decoded });
   });
 });
 
