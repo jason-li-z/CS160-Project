@@ -9,6 +9,8 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import Zoom from '@material-ui/core/Zoom';
+
 const useStyles = makeStyles({
   container: {
     display: 'flex',
@@ -139,70 +141,72 @@ function Register() {
   };
 
   return (
-    <div className>
-      <Paper
-        elevation={12}
-        style={{
-          padding: 40,
-          width: 380,
-          height: 'auto',
-          margin: '20px auto',
-        }}
-      >
-        <Container className={classes.container} style={{ padding: 10 }}>
-          <Typography variant="h5" style={{ paddingRight: 15 }}>
-            Register an Account
-          </Typography>
-          <Avatar style={{ backgroundColor: '#2A3035' }}>
-            <FaceIcon></FaceIcon>
-          </Avatar>
-        </Container>
-        <Container className={classes.container} style={{ paddingBottom: 15 }}>
-          <TextField
-            error={firstNameError}
-            helperText={firstNameErrorText}
-            label="First Name"
-            onChange={handleFirstNameOnChange}
-          ></TextField>
-        </Container>
-        <Container className={classes.container} style={{ paddingBottom: 15 }}>
-          <TextField
-            error={lastNameError}
-            helperText={lastNameErrorText}
-            label="Last Name"
-            onChange={handleLastNameOnChange}
-          ></TextField>
-        </Container>
-        <Container className={classes.container} style={{ paddingBottom: 15 }}>
-          <TextField
-            error={usernameError}
-            helperText={usernameErrorText}
-            label="Username"
-            onChange={handleUsernameOnChange}
-          ></TextField>
-        </Container>
-        <Container className={classes.container}>
-          <TextField
-            type="password"
-            error={passwordError}
-            helperText={passwordErrorText}
-            label="Password"
-            onChange={handlePasswordOnChange}
-          ></TextField>
-        </Container>
-        <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
-          <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-            {' '}
-            <Button color="primary" style={{ marginRight: 75 }}>
-              Back Home
+    <Zoom in={true} timeout={1000}>
+      <div className>
+        <Paper
+          elevation={12}
+          style={{
+            padding: 40,
+            width: 380,
+            height: 'auto',
+            margin: '20px auto',
+          }}
+        >
+          <Container className={classes.container} style={{ padding: 10 }}>
+            <Typography variant="h5" style={{ paddingRight: 15 }}>
+              Register an Account
+            </Typography>
+            <Avatar style={{ backgroundColor: '#2A3035' }}>
+              <FaceIcon></FaceIcon>
+            </Avatar>
+          </Container>
+          <Container className={classes.container} style={{ paddingBottom: 15 }}>
+            <TextField
+              error={firstNameError}
+              helperText={firstNameErrorText}
+              label="First Name"
+              onChange={handleFirstNameOnChange}
+            ></TextField>
+          </Container>
+          <Container className={classes.container} style={{ paddingBottom: 15 }}>
+            <TextField
+              error={lastNameError}
+              helperText={lastNameErrorText}
+              label="Last Name"
+              onChange={handleLastNameOnChange}
+            ></TextField>
+          </Container>
+          <Container className={classes.container} style={{ paddingBottom: 15 }}>
+            <TextField
+              error={usernameError}
+              helperText={usernameErrorText}
+              label="Username"
+              onChange={handleUsernameOnChange}
+            ></TextField>
+          </Container>
+          <Container className={classes.container}>
+            <TextField
+              type="password"
+              error={passwordError}
+              helperText={passwordErrorText}
+              label="Password"
+              onChange={handlePasswordOnChange}
+            ></TextField>
+          </Container>
+          <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              {' '}
+              <Button color="primary" style={{ marginRight: 75 }}>
+                Back Home
+              </Button>
+            </Link>
+            <Button type="submit" variant="contained" color="primary" onClick={handleOnClick}>
+              Register
             </Button>
-          </Link>
-          <Button type="submit" variant="contained" color="primary" onClick={handleOnClick}>
-            Register
-          </Button>
-        </Container>
-      </Paper>
-    </div>
+          </Container>
+        </Paper>
+      </div>
+    </Zoom>
   );
 }
 

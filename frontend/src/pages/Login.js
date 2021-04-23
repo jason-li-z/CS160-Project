@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom';
+import Zoom from '@material-ui/core/Zoom';
 
 const useStyles = makeStyles({
   container: {
@@ -81,43 +82,51 @@ function Login() {
   const classes = useStyles();
 
   return (
-    <div>
-      <Paper
-        elevation={12}
-        style={{
-          padding: 40,
-          width: 380,
-          height: 'auto',
-          margin: '20px auto',
-        }}
-      >
-        <Container className={classes.container}>
-          <Typography variant="h5" style={{ paddingRight: 20 }}>
-            User Login
-          </Typography>
-          <Avatar style={{ backgroundColor: '#2A3035' }}>
-            <LockIcon></LockIcon>
-          </Avatar>
-        </Container>
-        <Container className={classes.container} style={{ padding: 20 }}>
-          <TextField error={error} helperText={errorText} label="Username" onChange={handleUserOnChange}></TextField>
-        </Container>
-        <Container className={classes.container}>
-          <TextField label="Password" type="password" onChange={handlePasswordOnChange}></TextField>
-        </Container>
-        <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
-          <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-            {' '}
-            <Button color="primary" style={{ marginRight: 75 }}>
-              Back Home
+    <Zoom in={true} timeout={1000}>
+      <div>
+        <Paper
+          elevation={12}
+          style={{
+            padding: 40,
+            width: 380,
+            height: 'auto',
+            margin: '20px auto',
+          }}
+        >
+          <Container className={classes.container}>
+            <Typography variant="h5" style={{ paddingRight: 20 }}>
+              User Login
+            </Typography>
+            <Avatar style={{ backgroundColor: '#2A3035' }}>
+              <LockIcon></LockIcon>
+            </Avatar>
+          </Container>
+          <Container className={classes.container} style={{ padding: 20 }}>
+            <TextField error={error} helperText={errorText} label="Username" onChange={handleUserOnChange}></TextField>
+          </Container>
+          <Container className={classes.container}>
+            <TextField label="Password" type="password" onChange={handlePasswordOnChange}></TextField>
+          </Container>
+          <Container className={classes.container} style={{ marginTop: 25, padding: 30 }}>
+            <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+              {' '}
+              <Button color="primary" style={{ marginRight: 75 }}>
+                Back Home
+              </Button>
+            </Link>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              onClick={handleOnClick}
+              className={classes.buttonStyle}
+            >
+              Login
             </Button>
-          </Link>
-          <Button type="submit" variant="contained" color="primary" onClick={handleOnClick} className={classes.buttonStyle}>
-            Login
-          </Button>
-        </Container>
-      </Paper>
-    </div>
+          </Container>
+        </Paper>
+      </div>
+    </Zoom>
   );
 }
 
