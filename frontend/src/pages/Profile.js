@@ -41,7 +41,7 @@ function Profile() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: localStorage.getItem('token') }),
+        body: JSON.stringify({ token: localStorage.getItem('token'), firstName: "Adrian"}),
       });
       let data = await result.json();
       //Set the variable data
