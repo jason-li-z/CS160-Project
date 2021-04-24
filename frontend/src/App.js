@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Profile from './pages/Profile';
 import UserMain from './pages/UserMain';
+import Questions from './pages/Questions';
 
 const theme = createMuiTheme({
   typography: {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/profile" component={Profile} />
           <Route path="/userMain" component={UserMain} />
+          <Route path="/questions" component={Questions} />
           {/*<Route path="/profile" component={Profile} />*/}
         </Switch>
       </Router>
