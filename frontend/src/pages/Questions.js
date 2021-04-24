@@ -184,8 +184,8 @@ class Question extends React.Component {
     var surveyRender = !this.state.isCompleted ? (
         <Survey.Survey
             json = {json}
-            showCompletedPAge = {false}
-            onComplete = {this.onCompleteComponent}
+            showCompletedPage = {false}
+            onComplete = {this.onCompletedComponent}
         />
     ) : null;
 
@@ -228,6 +228,6 @@ function App() {
 }
 
 const root = document.getElementById("root");
-ReactDOM.render(<App onValueChanged={Questions.surveyValueChanged}/>, root);
+ReactDOM.render(<App onValueChanged={Question.surveyValueChanged}/>, root);
 
-export default Questions
+export default App
