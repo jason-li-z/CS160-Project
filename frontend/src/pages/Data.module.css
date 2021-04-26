@@ -1,0 +1,12 @@
+.table {
+
+    border:"1";
+    border-color:"blue";
+    width: "100%";
+
+}
+
+.row
+{
+    background-color: lightblue;
+}

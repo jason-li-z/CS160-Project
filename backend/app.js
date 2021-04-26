@@ -7,6 +7,9 @@ const jwt = require('jsonwebtoken');
 const { request, response } = require('express');
 const { JsonWebTokenError, decode } = require('jsonwebtoken');
 const { db } = require('./models/User');
+const Questions = require('./models/Questions');
+const Data = require('./models/Data');
+const Qa = require('./models/Qa');
 
 const app = express();
 const databaseURI =
@@ -70,6 +73,7 @@ app.post('/register', async (request, response) => {
         console.log('Creating user...');
         console.log(testUser);
       });
+
     } else {
       console.log(user);
     }
@@ -78,9 +82,57 @@ app.post('/register', async (request, response) => {
   response.json();
 });
 
+app.post('/userquestion', async (request, response) => {
+  const {username, q1, q2, q3, q4, q5, q6, q7, q8, q9, q10 } = request.body;
+
+  //console.log(username);
+  const testUser = Qa({
+    username: username, 
+    q1: q1, 
+    q2: q2, 
+    q3: q3, 
+    q4: q4, 
+    q5: q5, 
+    q6: q6, 
+    q7: q7, 
+    q8: q8,
+    q9: q9,
+    q10: q10,
+  });
+  //console.log(testUser);
+  await       testUser.save(function (err) {
+    if (err) throw err;
+
+    console.log('Creating user...');
+    console.log(testUser);
+  
+  }); 
+    
+  response.json();
+});
+
+app.post('/data', async (request, response) => {
+  //need to get the username
+  await Qa.find({username: "adri"}, (err, decoded) => {
+    if(err) throw err;
+      console.log(decoded);
+  // });
+  
+  
+    response.json({ status: 200, data: decoded });
+  });
+  //response.json();
+  
+  //console.log("B");
+});
+
+
 //Get the profile information
 app.post('/profile', async (request, response) => {
   let token = request.body.token;
+  //let name = request.body.username;
+  //let username = request.body.firstName;
+  //console.log(name);
   jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
     if (err) {
       response.json({ status: 401, message: 'token expired' });
