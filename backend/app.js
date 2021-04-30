@@ -113,7 +113,17 @@ app.post('/userquestion', async (request, response) => {
 
 app.post('/data', async (request, response) => {
   //need to get the username
-  await Qa.find({username: "adri"}, (err, decoded) => {
+  let token = request.body.token;
+  let username;
+  jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
+    if (err) {
+      //response.json({ status: 401, message: 'token expired' });
+      return;
+    }
+    //response.json({ status: 200, data: decoded });
+    username = decoded.username;
+  });
+  await Qa.find({username: username}, (err, decoded) => {
     if(err) throw err;
       console.log(decoded);
   // });
