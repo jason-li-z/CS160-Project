@@ -84,17 +84,25 @@ app.post('/userquestion', async (request, response) => {
   const { userName, questionArray } = request.body;
   const testUser = Questions({
     userName: userName,
+    questionArray: questionArray,
   });
-  // Try to find user, if user exists add onto array
-  // If user does not exist, create new entry
+
   await Questions.findOne({ userName: userName }, async (err, user) => {
-    if (err) throw err;
+    if (err) response.json({ status: 404 });
     if (user) {
       await Questions.updateOne({ userName: userName }, { $push: { questionArray: questionArray } });
       response.json({ status: 200 });
       return;
+    } else {
+      await testUser.save(function (err) {
+        if (err) console.log(err);
+        response.json({ status: 200 });
+        return;
+      });
     }
   });
+  // Try to find user, if user exists add onto array
+  // If user does not exist, create new entry
 });
 
 app.post('/data', async (request, response) => {
