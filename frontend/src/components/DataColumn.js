@@ -3,10 +3,12 @@ import styles from './DataColumn.module.css';
 
 /**This component renders a column based on the data that is passed in */
 function DataColumn({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, date }) {
+  let d = new Date(date).toString();
+  console.log(d);
   return (
     <>
       <tr>
-        <td width="150px">{date}</td>
+        <td width="150px">{d}</td>
         <td className={styles.row}>{q1}</td>
         <td className={q2 < 4 ? styles.rowa : q2 > 7 ? styles.rowg : styles.roway}>{q2}</td>
         <td className={q3 < 4 ? styles.rowa : q3 > 7 ? styles.rowg : styles.roway}>{q3}</td>
