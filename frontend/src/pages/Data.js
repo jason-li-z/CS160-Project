@@ -79,9 +79,13 @@ function Data() {
     return tableRows;
   }
 
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+  };
+
   return (
     <>
-      <NavbarUser />
+      <NavbarUser handleLogout={handleLogout} />
       <div className={styles.table}>
         <table border="1" bordercolor="blue" width="100%">
           <td colSpan="11" align="center">
