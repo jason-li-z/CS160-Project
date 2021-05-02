@@ -14,6 +14,7 @@ import NavbarUser from '../components/NavbarUser';
 function Data() {
   const [arr, setArr] = useState([]);
   const [username, setUsername] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   useEffect(() => {
     const getDatas = async () => {
@@ -29,6 +30,8 @@ function Data() {
 
       if (userInfoData.status === 200) {
         setUsername(userInfoData.data.username);
+      } else {
+        setIsLoggedIn(false);
       }
     };
 
@@ -41,7 +44,6 @@ function Data() {
         body: JSON.stringify({ token: localStorage.getItem('token') }),
       });
       let data = await result.json();
-      console.log(data);
       if (data.status === 200) {
         setArr(data.data.questionArray);
       }
@@ -49,6 +51,10 @@ function Data() {
     getDatas();
     getUserInfo();
   }, []);
+
+  if (!isLoggedIn) {
+    return <Redirect to="/"></Redirect>;
+  }
 
   /*Will render how many rows are associated with the user*/
   function getarray(array) {
