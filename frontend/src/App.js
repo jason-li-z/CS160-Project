@@ -26,13 +26,12 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route path="/" component={Home} exact />
+          <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/profile" component={Profile} />
-          <Route path="/userMain" component={UserMain} />
+          <Route path="/questions" component={UserMain} />
           <Route path="/data" component={Data} />
-          <Route path="/userQuestion" component={Userquestion} />
           <Route path="/graph" component={Graph} />
 
           {/*<Route path="/profile" component={Profile} />*/}
