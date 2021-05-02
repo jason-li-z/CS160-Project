@@ -3,7 +3,8 @@ import styles from './DataColumn.module.css';
 
 /**This component renders a column based on the data that is passed in */
 function DataColumn({ q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, date }) {
-  let d = new Date(date).toString();
+  //let d = new Date(date);
+  let d = new Date(date).toISOString().substring(0, 10);
   console.log(d);
   return (
     <>

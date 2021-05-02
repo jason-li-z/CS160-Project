@@ -8,6 +8,8 @@ import Profile from './pages/Profile';
 import UserMain from './pages/UserMain';
 import Data from './pages/Data';
 import Userquestion from './components/Userquestions';
+import Graph from './pages/Graph';
+import React, { useState, useEffect } from 'react';
 
 const theme = createMuiTheme({
   typography: {
@@ -25,14 +27,14 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" component={Home} exact />
-          <Route path="/#inline" component={Home}/>
-          <Route path="/#about" component={Home}/>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/profile" component={Profile} />
           <Route path="/userMain" component={UserMain} />
           <Route path="/data" component={Data} />
           <Route path="/userQuestion" component={Userquestion} />
+          <Route path="/graph" component={Graph} />
+
           {/*<Route path="/profile" component={Profile} />*/}
         </Switch>
       </Router>

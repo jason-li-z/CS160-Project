@@ -21,14 +21,14 @@ const barData = [
   //LINK IS NOT SET UP YET
   {
     title: 'Graph',
-    link: './#inline',
+    link: './graph',
     icon: <GoIcons.GoGraph />,
     classname: 'nav-text',
   },
   //LINK IS NOT SET UP YET
   {
     title: 'User Data',
-    link: './#inline',
+    link: './data',
     icon: <BiIcons.BiCalendarWeek />,
     classname: 'nav-text',
   },
