@@ -109,17 +109,21 @@ app.post('/data', async (request, response) => {
   //need to get the username
   const { token } = request.body;
   let obj = {};
-  jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
-    if (err) res.json({ status: 401, message: 'token expired' });
+  jwt.verify(token, 'CS160_JWT_SECRET_KEY', async (err, decoded) => {
+    if (err) {
+      response.json({ status: 401, message: 'token expired' });
+      return;
+    }
     obj = decoded;
-  });
-
-  await Questions.findOne({ userName: obj.username }, async (err, user) => {
-    if (err) throw err;
-    if (user) {
-      response.json({ status: 200, data: user });
-    } else {
-      response.json({ status: 404 });
+    if (obj) {
+      await Questions.findOne({ userName: obj.username }, async (err, user) => {
+        if (err) throw err;
+        if (user) {
+          response.json({ status: 200, data: user });
+        } else {
+          response.json({ status: 404 });
+        }
+      });
     }
   });
 });
