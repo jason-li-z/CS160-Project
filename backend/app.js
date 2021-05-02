@@ -121,7 +121,7 @@ app.post('/data', async (request, response) => {
         if (user) {
           response.json({ status: 200, data: user });
         } else {
-          response.json({ status: 404 });
+          response.json({ status: 404, msg: 'Empty' });
         }
       });
     }
