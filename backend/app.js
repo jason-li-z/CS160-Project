@@ -70,14 +70,13 @@ app.post('/register', async (request, response) => {
     if (user === null) {
       testUser.save(function (err) {
         if (err) throw err;
-        console.log('Creating user...');
-        console.log(testUser);
+        response.json({ status: 200 });
+        return;
       });
     } else {
-      console.log(user);
+      response.json({ status: 400 });
     }
   });
-  response.json();
 });
 
 app.post('/userquestion', async (request, response) => {

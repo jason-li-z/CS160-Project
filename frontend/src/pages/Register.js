@@ -132,9 +132,13 @@ function Register() {
           username: username,
           password: password,
         }),
-      }).then((response) => {
-        if (response.status === 200) {
+      }).then(async (response) => {
+        let result = await response.json();
+        if (result.status === 200) {
           history.push({ pathname: '/', state: { message: 'Registered successfully' } });
+        } else {
+          setUsernameError(true);
+          setUsernameErrorText('Username already exists');
         }
       });
     }
