@@ -8,6 +8,7 @@ import * as ImIcons from 'react-icons/im';
 import * as FcIcons from 'react-icons/fc';
 import * as CgIcons from 'react-icons/cg';
 import * as GoIcons from 'react-icons/go';
+import * as RiIcons from 'react-icons/ri';
 import './Navbar.css';
 import { HashLink as Link } from 'react-router-hash-link';
 
@@ -30,6 +31,12 @@ const barData = [
     title: 'User Data',
     link: './data',
     icon: <BiIcons.BiCalendarWeek />,
+    classname: 'nav-text',
+  },
+  {
+    title: 'Questions',
+    link: './questions',
+    icon: <RiIcons.RiQuestionnaireFill />,
     classname: 'nav-text',
   },
 ];
