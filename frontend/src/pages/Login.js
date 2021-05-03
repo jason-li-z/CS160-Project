@@ -70,7 +70,7 @@ function Login() {
       let data = await res.json();
       if (data.status === 200) {
         localStorage.setItem('token', data.token);
-        history.push('/userMain');
+        history.push('/questions');
       } else {
         localStorage.setItem('token', null);
         setError(true);
