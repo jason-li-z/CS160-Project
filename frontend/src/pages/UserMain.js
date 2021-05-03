@@ -37,7 +37,8 @@ function UserMain() {
         let current = new Date(data.data.questionArray[data.data.questionArray.length - 1].date);
         let next = new Date(current);
         next.setHours(24, 0, 0, 0);
-        if (next - current <= 0) {
+        let today = new Date();
+        if (today >= next) {
           setIsValid(true);
         } else {
           setIsValid(false);
