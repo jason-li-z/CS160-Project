@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import Fade from '@material-ui/core/Fade';
 
 import logo from './logo.png';
+import aboutimg from './aboutimage.png';
 import Footer from '../components/Footer';
 import About from '../components/About';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -65,7 +66,7 @@ function Home(props) {
           </Snackbar>
           <NavbarUser handleLogout={handleLogout} />
           <h1 className={styles.h1}>
-            <img src={logo} />
+            <img src={logo} alt='logo'/>
           </h1>
           <div className={styles.center}>
             <div className={styles.left}>
@@ -116,7 +117,7 @@ function Home(props) {
                     <br></br>
                     <BsIcons.BsArrowRight />
                     <b>
-                      Improve mental and productivty rates<br></br>
+                      See your mental and productivty rates increase<br></br>
                     </b>
                     <br></br>
                   </ul>
@@ -124,7 +125,7 @@ function Home(props) {
               </Container>
             </div>
             <div className={styles.right}>
-              <p>Image</p>
+              <p><img src={aboutimg} alt='about'/></p>
             </div>
           </div>
           <div>
@@ -146,7 +147,7 @@ function Home(props) {
         </Snackbar>
         <Navbar />
         <h1 className={styles.h1}>
-          <img src={logo} />
+          <img src={logo} alt='logo'/>
         </h1>
         <div className={styles.center}>
           <div className={styles.left}>
@@ -197,7 +198,7 @@ function Home(props) {
                   <br></br>
                   <BsIcons.BsArrowRight />
                   <b>
-                    Improve mental and productivty rates<br></br>
+                    See your mental and productivty rates improve<br></br>
                   </b>
                   <br></br>
                 </ul>
@@ -205,7 +206,7 @@ function Home(props) {
             </Container>
           </div>
           <div className={styles.right}>
-            <p>Image</p>
+            <img src={aboutimg} alt='about'/>
           </div>
         </div>
         <div>
