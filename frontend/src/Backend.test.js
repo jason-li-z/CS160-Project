@@ -36,3 +36,16 @@ describe('Testing Register', () => {
     expect(exist.status).toBe(400);
   });
 });
+
+describe('Testing Auth with no body', () => {
+  it('Should return user exists', async () => {
+    let auth = await fetch('http://localhost:5000/profile', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    let exist = await auth.json();
+    expect(exist.status).toBe(401);
+  });
+});
