@@ -12,7 +12,7 @@ import { Linka } from 'react-router-dom';
 import {HashLink as Link} from 'react-router-hash-link';
 import { Container } from '@material-ui/core';
 
-
+//Bottom of screen 
 function Footer()
 {
 
