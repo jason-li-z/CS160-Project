@@ -7,6 +7,9 @@ import smile from './smile.jpg';
 import flower from './flowerpot.jpg';
 import Alert from '@material-ui/lab/Alert';
 
+/* attribution for images:  
+https://pixabay.com/photos/flowerpot-engine-heart-earth-grow-2756428/ 
+https://pixabay.com/illustrations/smiley-yellow-happy-smile-emoticon-163510/ */
 function UserMain() {
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [valid, setIsValid] = useState(false);
@@ -15,7 +18,6 @@ function UserMain() {
   const [help, setHelp] = useState(false);
   const [open, setOpen] = useState(false);
   const [mental, setMental] = useState(false);
-  const [day, onChange] = useState(new Date());
 
   useEffect(() => {
     // Check if token has expired
@@ -39,7 +41,7 @@ function UserMain() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: localStorage.getItem('token') }),
+        body: JSON.stringify({ token: localStorage.getItem('token')}),
       });
       let data = await result.json();
       if (data.status === 200) {
@@ -89,22 +91,42 @@ function UserMain() {
     };
 
     const getHelp = () => {
-      dataInfo.forEach((element) => {
-        if(element.q4) {
-          setHelp(true);
-        }
-      });
+      if(dataInfo.length >= 7) {
+        let currentWeek = dataInfo.splice(dataInfo.length - 7);
+        currentWeek.forEach((element) => {
+          if(element.q4) {
+            setHelp(true);
+          }
+        });
+      }
+      else {
+        dataInfo.forEach((element) => {
+          if(element.q4) {
+            setHelp(true);
+          }
+        });
+      }
       if(help) {
         setOpen(true);
       }
     };
 
     const getMental = () => {
-      dataInfo.forEach((element) => {
-        if(element.q2 < 5) {
-          setMental(true);
-        }
-      });
+      if(dataInfo.length >= 7) {
+        let currentWeek = dataInfo.splice(dataInfo.length - 7);
+        currentWeek.forEach((element) => {
+          if(element.q2 < 5) {
+            setMental(true);
+          }
+        });
+      }
+      else {
+        dataInfo.forEach((element) => {
+          if(element.q2 < 5) {
+            setMental(true);
+          }
+        });
+      }
     };
     validate();
     getUserInfo();

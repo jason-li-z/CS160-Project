@@ -15,6 +15,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from 'react-router-dom';
 import Alert from '@material-ui/lab/Alert';
 
+/* attribution for image:
+https://pixabay.com/illustrations/presentation-statistic-boy-1454403/ */
+
 function Home(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
