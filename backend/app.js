@@ -10,6 +10,7 @@ const { db } = require('./models/User');
 const Questions = require('./models/Questions');
 // const Data = require('./models/Data');
 const Qa = require('./models/Qa');
+const Tasks = require('./models/Tasks');
 
 const app = express();
 const databaseURI =
@@ -147,6 +148,51 @@ app.post('/auth', async (req, res) => {
   jwt.verify(token, 'CS160_JWT_SECRET_KEY', (err, decoded) => {
     if (err) res.json({ status: 401, message: 'token expired' });
     res.json(decoded);
+  });
+});
+
+app.post('/setTask', async (request, response) => {
+  const { user, taskArray } = request.body;
+  const testUser = Tasks({
+    user: user,
+    taskArray: taskArray,
+  });
+  
+  await Tasks.findOne({ user: user }, async (err, task) => {
+    if (err) response.json({ status: 404 });
+    if (task) {
+      await Tasks.updateOne({ user: user }, { $push: { taskArray: taskArray } });
+      response.json({ status: 200 });
+      return;
+    } else {
+      await testUser.save(function (err) {
+        if (err) throw err;
+        response.json({ status: 200 });
+        return;
+      });
+    }
+  });
+});
+
+app.post('/getTask', async (request, response) => {
+  const { token, date } = request.body;
+  let obj = {};
+  jwt.verify(token, 'CS160_JWT_SECRET_KEY', async (err, decoded) => {
+    if (err) {
+      response.json({ status: 401, message: 'token expired' });
+      return;
+    }
+    obj = decoded;
+    if (obj) {
+      await Tasks.findOne({ user: obj.username}, async (err, user) => {
+        if (err) throw err;
+        if (user) {
+          response.json({ status: 200, data: user });
+        } else {
+          response.json({ status: 404, msg: 'Empty' });
+        }
+      });
+    }
   });
 });
 
