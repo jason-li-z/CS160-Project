@@ -10,6 +10,7 @@ import Data from './pages/Data';
 import Userquestion from './components/Userquestions';
 import Graph from './pages/Graph';
 import React, { useState, useEffect } from 'react';
+import Task from './pages/Task';
 
 const theme = createMuiTheme({
   typography: {
@@ -33,6 +34,7 @@ function App() {
           <Route path="/questions" component={UserMain} />
           <Route path="/data" component={Data} />
           <Route path="/graph" component={Graph} />
+          <Route path='/task' component={Task} />
 
           {/*<Route path="/profile" component={Profile} />*/}
         </Switch>
