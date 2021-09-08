@@ -19,14 +19,12 @@ const barData = [
     icon: <ImIcons.ImHome />,
     classname: 'nav-text',
   },
-  //LINK IS NOT SET UP YET
   {
     title: 'Graph',
     link: './graph',
     icon: <GoIcons.GoGraph />,
     classname: 'nav-text',
   },
-  //LINK IS NOT SET UP YET
   {
     title: 'User Data',
     link: './data',
@@ -41,6 +39,7 @@ const barData = [
   },
 ];
 
+/*Navbar for user*/
 function NavbarUser({ handleLogout }) {
   const [leftBar, setLeftBar] = useState(false);
   const displayBar = () => setLeftBar(!leftBar);
@@ -74,9 +73,9 @@ function NavbarUser({ handleLogout }) {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
-            {barData.map((item, index) => {
+            {barData.map((item) => {
               return (
-                <li key={index} className={item.classname}>
+                <li className={item.classname}>
                   <Link to={item.link}>
                     {item.icon} <pre> </pre>
                     <span>{item.title}</span>
