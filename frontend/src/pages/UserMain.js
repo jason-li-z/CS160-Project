@@ -6,11 +6,18 @@ import { Redirect } from 'react-router-dom';
 import smile from './smile.jpg';
 import flower from './flowerpot.jpg';
 import Alert from '@material-ui/lab/Alert';
+import Button from '@material-ui/core/Button';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
+import DataColumn from '../components/DataColumn';
+import styles from './Data.module.css';
 
-/* attribution for images:  
-https://pixabay.com/photos/flowerpot-engine-heart-earth-grow-2756428/ 
-https://pixabay.com/illustrations/smiley-yellow-happy-smile-emoticon-163510/ */
 function UserMain() {
+
+  const history = useHistory();
+
   const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [valid, setIsValid] = useState(false);
   const [weeklyProgress, setWeeklyProgress] = useState(0.0);
@@ -18,6 +25,9 @@ function UserMain() {
   const [help, setHelp] = useState(false);
   const [open, setOpen] = useState(false);
   const [mental, setMental] = useState(false);
+  const [day, onChange] = useState(new Date());
+  const [taskArray, setTaskArray] = useState([]);
+  const [calDay, setCalDay] = useState('');
 
   useEffect(() => {
     // Check if token has expired
@@ -41,7 +51,8 @@ function UserMain() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ token: localStorage.getItem('token')}),
+        body: JSON.stringify({ token: localStorage.getItem('token'),
+      date: day }),
       });
       let data = await result.json();
       if (data.status === 200) {
@@ -130,6 +141,7 @@ function UserMain() {
     };
     validate();
     getUserInfo();
+    changeDate();
     // let date = new Date(last.date);
     // let nextMidnight = date.setHours(24, 0, 0, 0);
     // console.log(nextMidnight);
@@ -147,6 +159,53 @@ function UserMain() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const onClick = () => {
+    history.push({ pathname: '/task', state: { message: 'Add a task' } });
+  };
+
+  const changeDate = async () => {
+    setCalDay(day.toString().substring(3, 10) + "," + day.toString().substring(10, 15));
+    let result = await fetch('http://localhost:5000/getTask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        token: localStorage.getItem('token'),
+      }),
+    });
+    let data = await result.json();
+    
+    if (data.status === 200) {
+      setTaskArray(data.data.taskArray);
+    }
+
+  };
+
+  function getarray(array) {
+    var rows = [];
+    var tableRows = [];
+    for (var i = 0; i < array.length; i++) {
+      rows.push(array[i]);
+    }
+    //console.log(array[0].q9);
+    // console.log();
+    rows.forEach(function (item) {
+      var name = item.name;
+      var description = item.description;
+      if(item.date === day.toISOString().substring(0, 10)) {
+
+        tableRows.push(
+          <tr>
+            <td> {name} </td>
+            <td> {description} </td>
+          </tr>
+        );
+      }
+    });
+    return tableRows;
+  }
 
   return (
     <Fade in={true} timeout={1000}>
@@ -167,6 +226,29 @@ function UserMain() {
               <Fade in={true}>
                 <h2>You've already answered recently, please come back tomorrow or at 12AM.</h2>
               </Fade>
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <Calendar
+                onChange={onChange}
+                onClickDay={changeDate}
+                onClickMonth={changeDate}
+                calendarType={"US"}
+                value={day} />
+              <Container>
+                <Button  variant="contained" color="primary" style={{ marginRight: 40 }} onClick={onClick}>Add a task</Button>
+                <table border="1" bordercolor="blue" width="100%">
+                  <td colSpan="11" align="center">
+                    <h3>
+                      <b>Tasks for: {calDay}</b>
+                    </h3>{' '}
+                  </td>
+                  <tr>
+                    <td> Name </td>
+                    <td> Description </td>
+                  </tr>
+                  {getarray(taskArray)}
+                </table>
+              </Container>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center'}} >
               <h2>Feedback</h2>
